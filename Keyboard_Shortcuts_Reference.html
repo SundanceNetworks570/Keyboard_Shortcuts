@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Keyboard Shortcuts Reference — Windows, Office, Google</title>
+  <style>
+    :root{
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #0b1220;
+      --card: #0b1220;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #60a5fa;
+      --accent-2:#34d399;
+      --warn:#fbbf24;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+    body{
+      margin:0; background: radial-gradient(1200px 700px at 10% -10%, #1f2937 0%, #0f172a 45%, #060a14 100%);
+      color:var(--text); font-family:var(--sans);
+    }
+    header{
+      padding: 22px 18px 8px;
+      position: sticky; top:0; z-index:10;
+      background: linear-gradient(180deg, rgba(15,23,42,0.98), rgba(15,23,42,0.9) 80%, rgba(15,23,42,0));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid var(--border);
+    }
+    .wrap{ max-width:1200px; margin:0 auto; }
+    .titlebar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    h1{
+      font-size: clamp(20px, 2.2vw, 28px); margin:0;
+      letter-spacing:0.4px; font-weight:800;
+      display:flex; gap:10px; align-items:center;
+    }
+    .badge{
+      font-size:12px; color:#0b1220; background:var(--accent); padding:3px 8px; border-radius:999px; font-weight:700;
+    }
+    .controls{
+      margin-top:14px;
+      display:grid; grid-template-columns: 1.3fr 1fr auto; gap:10px;
+    }
+    @media (max-width:900px){
+      .controls{ grid-template-columns:1fr; }
+    }
+    .input, select, button{
+      background:var(--panel); color:var(--text);
+      border:1px solid var(--border); border-radius:10px;
+      padding:10px 12px; font-size:14px; outline:none;
+      box-shadow: var(--shadow);
+    }
+    .input::placeholder{ color:var(--muted); }
+    button{
+      cursor:pointer; font-weight:700; letter-spacing:0.2px;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      transition: transform .05s ease, border-color .2s ease, background .2s ease;
+    }
+    button:hover{ transform: translateY(-1px); border-color: rgba(96,165,250,.7); }
+    .btn-ghost{ background:var(--panel-2); }
+    .btn-accent{ background: linear-gradient(180deg, #2563eb, #1d4ed8); border-color:#1d4ed8; }
+    .btn-accent-2{ background: linear-gradient(180deg, #10b981, #059669); border-color:#059669; }
+    .pill-row{
+      display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;
+    }
+    .pill{
+      padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700;
+      background:var(--panel-2); border:1px solid var(--border); color:var(--text);
+      cursor:pointer; user-select:none;
+    }
+    .pill.active{
+      background: rgba(96,165,250,.15); border-color: rgba(96,165,250,.6);
+      color:#dbeafe;
+    }
+    main{ padding: 18px; }
+    .legend{
+      background:var(--panel-2); border:1px dashed var(--border); border-radius:var(--radius);
+      padding:12px 14px; margin: 6px 0 14px; color:var(--muted); font-size:13px;
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+    }
+    .key{
+      font-family:var(--mono);
+      background:#0a0f1c; border:1px solid var(--border);
+      padding:2px 6px; border-radius:8px; color:#e2e8f0; font-size:12px;
+    }
+
+    .section{
+      background:var(--panel-2); border:1px solid var(--border);
+      border-radius:var(--radius); margin: 14px 0; overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .section-head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 14px; background:rgba(255,255,255,0.02);
+      border-bottom:1px solid var(--border);
+      cursor:pointer;
+    }
+    .section-title{
+      display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px;
+    }
+    .section-meta{ font-size:12px; color:var(--muted); font-weight:700; }
+    .chev{ transition: transform .2s ease; opacity:.8; }
+    .collapsed .chev{ transform: rotate(-90deg); }
+    .section-body{ padding: 6px 8px 12px; }
+    .collapsed .section-body{ display:none; }
+
+    table{
+      width:100%; border-collapse:separate; border-spacing:0 6px; font-size:14px;
+    }
+    th{
+      text-align:left; font-size:12px; color:var(--muted);
+      padding: 0 10px;
+    }
+    td{
+      padding:10px; background:var(--card); border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+    }
+    tr td:first-child{
+      border-left:1px solid var(--border); border-radius:10px 0 0 10px; width: 34%;
+    }
+    tr td:last-child{
+      border-right:1px solid var(--border); border-radius:0 10px 10px 0; width: 50%;
+    }
+    .shortcut{
+      font-family:var(--mono); font-weight:800; letter-spacing:.2px;
+      display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+    }
+    .platform{
+      font-size:11px; font-weight:800; color:#0b1220; background:var(--warn); padding:2px 6px; border-radius:999px;
+    }
+    .app{
+      font-size:11px; font-weight:800; color:#0b1220; background:var(--accent-2); padding:2px 6px; border-radius:999px;
+    }
+    .desc{ color:#e5e7eb; line-height:1.35; }
+    .note{ color:var(--muted); font-size:12px; margin-top:4px; }
+    .actions{
+      display:flex; gap:6px; justify-content:flex-end; align-items:center;
+    }
+    .tiny{
+      font-size:12px; padding:6px 8px; border-radius:8px;
+      background:var(--panel); border:1px solid var(--border);
+    }
+    .empty{
+      text-align:center; color:var(--muted); padding:28px 12px;
+      background:var(--panel-2); border:1px dashed var(--border); border-radius:var(--radius);
+      margin-top:10px;
+    }
+    footer{
+      padding:18px; color:var(--muted); font-size:12px; text-align:center;
+    }
+
+    /* Print styles */
+    @media print{
+      header{ position:static; background:none; border:none; }
+      body{ background:white; color:black; }
+      .input, select, button, .pill-row{ display:none !important; }
+      .section{ box-shadow:none; border:1px solid #ddd; }
+      td, th{ background:white !important; color:black !important; border-color:#ddd !important; }
+      .platform, .app{ background:#eee !important; color:black !important; }
+    }
+  
+    /* Floating Print Button */
+    .floating-print{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1000;
+      padding: 12px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: .3px;
+      background: linear-gradient(180deg, #2563eb, #1d4ed8);
+      border: 1px solid #1d4ed8;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+    .floating-print:hover{
+      transform: translateY(-2px);
+      border-color: rgba(96,165,250,.9);
+    }
+    @media print{
+      .floating-print{ display:none !important; }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="titlebar">
+        <h1>
+          Keyboard Shortcuts Reference
+          <span class="badge">Windows • Office • Google</span>
+        </h1>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-ghost" id="expandAllBtn" title="Expand all sections">Expand All</button>
+          <button class="btn-ghost" id="collapseAllBtn" title="Collapse all sections">Collapse All</button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input id="searchInput" class="input" placeholder="Search shortcuts (e.g., 'copy', 'Ctrl+K', 'calendar', 'pivot table')..." />
+        <select id="scopeSelect" aria-label="Scope filter">
+          <option value="all">All (Windows + Office + Google)</option>
+          <option value="windows">Windows only</option>
+          <option value="office">Microsoft Office only</option>
+          <option value="google">Google Workspace only</option>
+        </select>
+        <div style="display:flex; gap:8px;">
+          <button class="btn-accent" id="printBtn">Print / Save PDF</button>
+          <button class="btn-ghost" id="resetBtn" title="Clear filters & search">Reset</button>
+        </div>
+      </div>
+
+      <div class="pill-row" id="appPills" aria-label="App filters"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="legend">
+      <strong style="color:#e2e8f0;">Legend:</strong>
+      <span class="key">Ctrl</span> <span class="key">Alt</span> <span class="key">Shift</span> <span class="key">Win</span>
+      <span>Use search + filters to build a custom classroom handout.</span>
+    </div>
+
+    <div id="sections"></div>
+    <div id="emptyState" class="empty" style="display:none;">No shortcuts match your search/filter.</div>
+  </main>
+
+  <footer>
+    Tip: In your browser print dialog, choose “Save as PDF” to download a clean handout.
+  </footer>
+
+<script>
+/** =========================
+ *  DATA: Edit / add freely.
+ *  ========================= */
+const shortcuts = [
+  /** =====================
+   *  WINDOWS
+   *  ===================== */
+  { scope:"windows", app:"Windows", keys:"Win + D", what:"Show/Hide Desktop" },
+  { scope:"windows", app:"Windows", keys:"Win + L", what:"Lock PC" },
+  { scope:"windows", app:"Windows", keys:"Win + E", what:"Open File Explorer" },
+  { scope:"windows", app:"Windows", keys:"Win + I", what:"Open Settings" },
+  { scope:"windows", app:"Windows", keys:"Alt + Tab", what:"Switch between open apps" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Shift + Esc", what:"Open Task Manager" },
+  { scope:"windows", app:"Windows", keys:"Win + V", what:"Open Clipboard history (if enabled)" },
+  { scope:"windows", app:"Windows", keys:"Win + Shift + S", what:"Snipping Tool (select area screenshot)" },
+  { scope:"windows", app:"Windows", keys:"Win + PrtScn", what:"Save full screenshot to Pictures > Screenshots" },
+  { scope:"windows", app:"Windows", keys:"PrtScn", what:"Copy full screen to clipboard" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + C / Ctrl + V", what:"Copy / Paste" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + X", what:"Cut" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Z / Ctrl + Y", what:"Undo / Redo" },
+  { scope:"windows", app:"Windows", keys:"Win + Arrow Keys", what:"Snap window to screen edges" },
+  { scope:"windows", app:"Windows", keys:"Win + Up / Down", what:"Maximize / Minimize window" },
+  { scope:"windows", app:"Windows", keys:"Win + Tab", what:"Task View (all windows + desktops)" },
+  { scope:"windows", app:"Windows", keys:"Win + Ctrl + D", what:"Create new virtual desktop" },
+  { scope:"windows", app:"Windows", keys:"Win + Ctrl + Left/Right", what:"Switch virtual desktops" },
+  { scope:"windows", app:"Windows", keys:"Win + Ctrl + F4", what:"Close current virtual desktop" },
+  { scope:"windows", app:"Windows", keys:"Win + R", what:"Run dialog" },
+  { scope:"windows", app:"Windows", keys:"Win + S", what:"Search Windows" },
+  { scope:"windows", app:"Windows", keys:"Win + X", what:"Power user menu" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Shift + N", what:"New folder in File Explorer" },
+  { scope:"windows", app:"Windows", keys:"F2", what:"Rename selected item" },
+  { scope:"windows", app:"Windows", keys:"Alt + F4", what:"Close current app/window" },
+  { scope:"windows", app:"Windows", keys:"Win + .", what:"Emoji picker" },
+
+  /** =====================
+   *  OFFICE — COMMON
+   *  ===================== */
+  { scope:"office", app:"Office (All)", keys:"Ctrl + N", what:"New file" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + O", what:"Open file" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + S", what:"Save" },
+  { scope:"office", app:"Office (All)", keys:"F12", what:"Save As" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + P", what:"Print" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + K", what:"Insert hyperlink" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + F", what:"Find" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + H", what:"Replace" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + A", what:"Select all" },
+  { scope:"office", app:"Office (All)", keys:"Ctrl + Shift + C / V", what:"Copy / paste formatting (where supported)" },
+
+  /** =====================
+   *  WORD
+   *  ===================== */
+  { scope:"office", app:"Word", keys:"Ctrl + B / I / U", what:"Bold / Italic / Underline" },
+  { scope:"office", app:"Word", keys:"Ctrl + L / E / R / J", what:"Align Left / Center / Right / Justify" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + > / <", what:"Increase / decrease font size" },
+  { scope:"office", app:"Word", keys:"Ctrl + 1 / 2 / 5", what:"Single / Double / 1.5 line spacing" },
+  { scope:"office", app:"Word", keys:"Ctrl + Enter", what:"Page break" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + N", what:"Normal style" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + L", what:"Apply bullet list" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + C / V", what:"Copy / paste formatting" },
+
+  /** =====================
+   *  EXCEL
+   *  ===================== */
+  { scope:"office", app:"Excel", keys:"Ctrl + Arrow Keys", what:"Jump to edge of data region" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + Arrow Keys", what:"Select to edge of data region" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + L", what:"Toggle filters on/off" },
+  { scope:"office", app:"Excel", keys:"Alt + = ", what:"AutoSum selected range" },
+  { scope:"office", app:"Excel", keys:"F2", what:"Edit active cell" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Space", what:"Select entire column" },
+  { scope:"office", app:"Excel", keys:"Shift + Space", what:"Select entire row" },
+  { scope:"office", app:"Excel", keys:"Ctrl + 1", what:"Format Cells dialog" },
+  { scope:"office", app:"Excel", keys:"Ctrl + ; / Ctrl + Shift + ;", what:"Insert current date / time" },
+  { scope:"office", app:"Excel", keys:"Ctrl + T", what:"Create table from selection" },
+  { scope:"office", app:"Excel", keys:"Ctrl + `", what:"Show/hide formulas" },
+  { scope:"office", app:"Excel", keys:"Alt + H, O, I", what:"AutoFit column width (Ribbon sequence)" },
+
+  /** =====================
+   *  OUTLOOK
+   *  ===================== */
+  { scope:"office", app:"Outlook", keys:"Ctrl + R", what:"Reply" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + R", what:"Reply All" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + F", what:"Forward" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + M", what:"New email" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Enter", what:"Send email" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + 1 / 2 / 3", what:"Mail / Calendar / Contacts views" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + K", what:"New task" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + A", what:"New appointment" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + Q", what:"New meeting request" },
+
+  /** =====================
+   *  POWERPOINT
+   *  ===================== */
+  { scope:"office", app:"PowerPoint", keys:"F5", what:"Start slideshow from beginning" },
+  { scope:"office", app:"PowerPoint", keys:"Shift + F5", what:"Start slideshow from current slide" },
+  { scope:"office", app:"PowerPoint", keys:"Esc", what:"End slideshow" },
+  { scope:"office", app:"PowerPoint", keys:"B / W", what:"Black / White screen during slideshow" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + M", what:"New slide" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + D", what:"Duplicate selected object/slide" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + G / Shift + Ctrl + G", what:"Group / Ungroup objects" },
+  { scope:"office", app:"PowerPoint", keys:"Alt + Shift + Left/Right", what:"Promote/demote bullet level" },
+
+  /** =====================
+   *  TEAMS (Office scope)
+   *  ===================== */
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + M", what:"Mute/unmute microphone" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + O", what:"Turn camera on/off" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + E", what:"Share screen / stop sharing" },
+  { scope:"office", app:"Teams", keys:"Ctrl + E", what:"Search (top bar)" },
+  { scope:"office", app:"Teams", keys:"Ctrl + N", what:"Start new chat" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + X", what:"Expand compose box" },
+
+  /** =====================
+   *  ONENOTE (Office scope)
+   *  ===================== */
+  { scope:"office", app:"OneNote", keys:"Ctrl + N", what:"New page in section" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + Alt + D", what:"Dock OneNote to desktop" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + Shift + E", what:"Send selected to email" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + 1", what:"To Do tag" },
+
+  /** =====================
+   *  GOOGLE DOCS
+   *  ===================== */
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Alt + M", what:"Insert comment" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + /", what:"Open shortcut help" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Shift + C", what:"Word count" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + K", what:"Insert link" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Shift + Y", what:"Open dictionary" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Alt + Shift + H", what:"Open revision history" },
+
+  /** =====================
+   *  GOOGLE SHEETS
+   *  ===================== */
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + Shift + V", what:"Paste values only" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + Space / Shift + Space", what:"Select column / row" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + /", what:"Open shortcut help" },
+  { scope:"google", app:"Google Sheets", keys:"Alt + Shift + 5", what:"Strikethrough" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + Z / Ctrl + Y", what:"Undo / Redo" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + ;", what:"Insert current date" },
+
+  /** =====================
+   *  GMAIL
+   *  ===================== */
+  { scope:"google", app:"Gmail", keys:"C", what:"Compose new message (shortcuts enabled)" },
+  { scope:"google", app:"Gmail", keys:"R / A / F", what:"Reply / Reply all / Forward" },
+  { scope:"google", app:"Gmail", keys:"E", what:"Archive conversation" },
+  { scope:"google", app:"Gmail", keys:"#", what:"Delete conversation" },
+  { scope:"google", app:"Gmail", keys:"/", what:"Search mail" },
+  { scope:"google", app:"Gmail", keys:"G then I", what:"Go to Inbox" },
+  { scope:"google", app:"Gmail", keys:"G then S", what:"Go to Starred" },
+
+  /** =====================
+   *  GOOGLE SLIDES
+   *  ===================== */
+  { scope:"google", app:"Google Slides", keys:"Ctrl + M", what:"New slide" },
+  { scope:"google", app:"Google Slides", keys:"Ctrl + D", what:"Duplicate selected slide/object" },
+  { scope:"google", app:"Google Slides", keys:"Ctrl + Shift + F", what:"Present fullscreen" },
+
+  /** =====================
+   *  GOOGLE DRIVE
+   *  ===================== */
+  { scope:"google", app:"Google Drive", keys:"Shift + T", what:"New Google Doc" },
+  { scope:"google", app:"Google Drive", keys:"Shift + S", what:"New Google Sheet" },
+  { scope:"google", app:"Google Drive", keys:"Shift + P", what:"New Google Slides deck" },
+
+  /** =====================
+   *  GOOGLE CALENDAR
+   *  ===================== */
+  { scope:"google", app:"Google Calendar", keys:"C", what:"Create new event" },
+  { scope:"google", app:"Google Calendar", keys:"D / W / M / Y", what:"Day / Week / Month / Year view" },
+  { scope:"google", app:"Google Calendar", keys:"T", what:"Jump to today" },
+  { scope:"google", app:"Google Calendar", keys:"/", what:"Search calendar" },
+
+  /** =====================
+   *  GOOGLE MEET
+   *  ===================== */
+  { scope:"google", app:"Google Meet", keys:"Ctrl + D", what:"Mute/unmute microphone" },
+  { scope:"google", app:"Google Meet", keys:"Ctrl + E", what:"Turn camera on/off" },
+  { scope:"google", app:"Google Meet", keys:"Ctrl + Alt + C", what:"Open chat panel" },
+
+  /** =====================
+   *  CHROME (Google scope)
+   *  ===================== */
+  { scope:"google", app:"Chrome", keys:"Ctrl + T", what:"New tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + W", what:"Close tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + T", what:"Reopen last closed tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + L", what:"Focus address bar" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Tab / Ctrl + Shift + Tab", what:"Next / previous tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + + / Ctrl + - / Ctrl + 0", what:"Zoom in / out / reset zoom" },
+
+  // --- Word (MORE) ---
+  { scope:"office", app:"Word", keys:"Ctrl + C / V / X", what:"Copy / Paste / Cut" },
+  { scope:"office", app:"Word", keys:"Ctrl + Z / Y", what:"Undo / Redo" },
+  { scope:"office", app:"Word", keys:"Ctrl + F", what:"Find" },
+  { scope:"office", app:"Word", keys:"Ctrl + H", what:"Find & Replace" },
+  { scope:"office", app:"Word", keys:"Ctrl + G", what:"Go To (page/section/line)" },
+  { scope:"office", app:"Word", keys:"Ctrl + A", what:"Select all" },
+  { scope:"office", app:"Word", keys:"Ctrl + Backspace", what:"Delete previous word" },
+  { scope:"office", app:"Word", keys:"Ctrl + Delete", what:"Delete next word" },
+  { scope:"office", app:"Word", keys:"Ctrl + Home / End", what:"Go to start / end of document" },
+  { scope:"office", app:"Word", keys:"Ctrl + Left/Right Arrow", what:"Move one word left/right" },
+  { scope:"office", app:"Word", keys:"Ctrl + Up/Down Arrow", what:"Move one paragraph up/down" },
+  { scope:"office", app:"Word", keys:"Shift + Arrow Keys", what:"Select text" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + Arrow Keys", what:"Select by word/paragraph" },
+  { scope:"office", app:"Word", keys:"Ctrl + ] / [", what:"Increase / decrease font size by 1 pt" },
+  { scope:"office", app:"Word", keys:"Ctrl + D", what:"Open Font dialog" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + A", what:"All caps formatting" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + W", what:"Underline words only" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + M", what:"Decrease indent" },
+  { scope:"office", app:"Word", keys:"Ctrl + M", what:"Increase indent" },
+  { scope:"office", app:"Word", keys:"Ctrl + T", what:"Hanging indent" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + T", what:"Reduce hanging indent" },
+  { scope:"office", app:"Word", keys:"Ctrl + Q", what:"Clear paragraph formatting" },
+  { scope:"office", app:"Word", keys:"Ctrl + Space", what:"Clear character formatting" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + 8", what:"Show/Hide formatting marks (¶)" },
+  { scope:"office", app:"Word", keys:"Alt + Shift + Up/Down", what:"Move selected paragraph up/down" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + N", what:"Apply Normal style" },
+  { scope:"office", app:"Word", keys:"Alt + Ctrl + 1/2/3", what:"Apply Heading 1/2/3 styles" },
+  { scope:"office", app:"Word", keys:"Ctrl + Shift + L", what:"Apply bullet list" },
+  { scope:"office", app:"Word", keys:"Ctrl + Alt + V", what:"Paste Special" },
+  { scope:"office", app:"Word", keys:"F7", what:"Spelling & Grammar check" },
+  { scope:"office", app:"Word", keys:"Shift + F3", what:"Change case (lower/UPPER/Title)" },
+  { scope:"office", app:"Word", keys:"Ctrl + Alt + M", what:"Insert comment" },
+  { scope:"office", app:"Word", keys:"Ctrl + Alt + 2", what:"Insert registered trademark symbol ®" },
+
+  // --- Excel (MORE) ---
+  { scope:"office", app:"Excel", keys:"Ctrl + C / V / X", what:"Copy / Paste / Cut" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Z / Y", what:"Undo / Redo" },
+  { scope:"office", app:"Excel", keys:"Ctrl + F", what:"Find" },
+  { scope:"office", app:"Excel", keys:"Ctrl + H", what:"Find & Replace" },
+  { scope:"office", app:"Excel", keys:"Ctrl + A", what:"Select current region / all" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + +", what:"Insert cells/rows/columns" },
+  { scope:"office", app:"Excel", keys:"Ctrl + -", what:"Delete cells/rows/columns" },
+  { scope:"office", app:"Excel", keys:"Ctrl + D", what:"Fill Down" },
+  { scope:"office", app:"Excel", keys:"Ctrl + R", what:"Fill Right" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Enter", what:"Fill selection with current entry" },
+  { scope:"office", app:"Excel", keys:"Alt + Enter", what:"Line break inside a cell" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Page Up / Page Down", what:"Switch worksheets" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Home / End", what:"Go to A1 / last used cell" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + $", what:"Currency format" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + %", what:"Percentage format" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + #", what:"Date format" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + @", what:"Time format" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + ~", what:"General number format" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + !", what:"Number format with commas, 2 decimals" },
+  { scope:"office", app:"Excel", keys:"Ctrl + 5", what:"Strikethrough on/off" },
+  { scope:"office", app:"Excel", keys:"Ctrl + B / I / U", what:"Bold / Italic / Underline" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + &", what:"Apply outline border" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + _", what:"Remove outline border" },
+  { scope:"office", app:"Excel", keys:"Alt + H, H", what:"Fill color menu (Ribbon sequence)" },
+  { scope:"office", app:"Excel", keys:"Alt + H, B", what:"Borders menu (Ribbon sequence)" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Alt + V", what:"Paste Special" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + U", what:"Expand/collapse formula bar" },
+  { scope:"office", app:"Excel", keys:"F4", what:"Repeat last action / toggle $ in formula ref" },
+  { scope:"office", app:"Excel", keys:"Alt + F1", what:"Create chart in current sheet" },
+  { scope:"office", app:"Excel", keys:"F11", what:"Create chart on new sheet" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + L", what:"Toggle Filters" },
+  { scope:"office", app:"Excel", keys:"Alt + Down Arrow", what:"Open filter dropdown" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + L", what:"Turn filters on/off" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Alt + F5", what:"Refresh all data connections" },
+  { scope:"office", app:"Excel", keys:"Ctrl + Shift + K", what:"Insert hyperlink (newer Excel)" },
+
+  // --- PowerPoint (MORE) ---
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + N / O / S", what:"New / Open / Save presentation" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + Z / Y", what:"Undo / Redo" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + C / V / X", what:"Copy / Paste / Cut" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + A", what:"Select all objects on slide" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + Shift + C / V", what:"Copy / paste formatting" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + Shift + >", what:"Increase font size" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + Shift + <", what:"Decrease font size" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + Shift + G", what:"Ungroup objects" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + G", what:"Group objects" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + Shift + ] / [", what:"Bring to front / Send to back" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + Shift + D", what:"Duplicate slide" },
+  { scope:"office", app:"PowerPoint", keys:"N / P", what:"Next / Previous slide during slideshow" },
+  { scope:"office", app:"PowerPoint", keys:"Ctrl + P", what:"Pen tool during slideshow" },
+  { scope:"office", app:"PowerPoint", keys:"E", what:"Erase ink during slideshow" },
+
+  // --- Outlook (MORE) ---
+  { scope:"office", app:"Outlook", keys:"Ctrl + N", what:"New item (email in Mail view)" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + M", what:"New email from anywhere" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + I", what:"Switch to Inbox" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + O", what:"Switch to Outbox" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + B", what:"Open Address Book" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Q", what:"Mark as read" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + U", what:"Mark as unread" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + G", what:"Flag for follow-up" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + V", what:"Move message to folder" },
+  { scope:"office", app:"Outlook", keys:"Alt + S", what:"Send/Receive all folders" },
+  { scope:"office", app:"Outlook", keys:"Ctrl + Shift + F", what:"Advanced Find" },
+
+  // --- Windows (MORE) ---
+  { scope:"windows", app:"Windows", keys:"Win + A", what:"Quick Settings / Action Center" },
+  { scope:"windows", app:"Windows", keys:"Win + N", what:"Notifications / Calendar" },
+  { scope:"windows", app:"Windows", keys:"Win + K", what:"Cast / Connect devices" },
+  { scope:"windows", app:"Windows", keys:"Win + P", what:"Project / display mode" },
+  { scope:"windows", app:"Windows", keys:"Win + U", what:"Accessibility settings" },
+  { scope:"windows", app:"Windows", keys:"Win + G", what:"Xbox Game Bar (screen recording)" },
+  { scope:"windows", app:"Windows", keys:"Win + Pause/Break", what:"System properties" },
+  { scope:"windows", app:"Windows", keys:"Win + B", what:"Focus notification area icons" },
+  { scope:"windows", app:"Windows", keys:"Win + T", what:"Cycle through taskbar apps" },
+  { scope:"windows", app:"Windows", keys:"Win + Number (1–9)", what:"Open pinned taskbar app in that position" },
+  { scope:"windows", app:"Windows", keys:"Win + Shift + Number", what:"Open new instance of pinned app" },
+  { scope:"windows", app:"Windows", keys:"Win + Alt + Number", what:"Open Jump List for pinned app" },
+  { scope:"windows", app:"Windows", keys:"Win + Ctrl + Shift + Number", what:"Open pinned app as administrator" },
+  { scope:"windows", app:"Windows", keys:"Alt + Space", what:"Window menu (move, size, minimize, maximize)" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Alt + Del", what:"Security options screen" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Shift (while dragging file)", what:"Create shortcut instead of move/copy" },
+  { scope:"windows", app:"Windows", keys:"Shift + Delete", what:"Delete permanently (bypass recycle bin)" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Shift + N", what:"New folder (File Explorer)" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + L / Alt + D", what:"Select address bar (File Explorer / browser)" },
+  { scope:"windows", app:"Windows", keys:"Alt + Left/Right Arrow", what:"Back / forward in File Explorer" },
+  { scope:"windows", app:"Windows", keys:"Alt + Up Arrow", what:"Up one folder level in File Explorer" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Mouse Wheel", what:"Change icon size in File Explorer" },
+  { scope:"windows", app:"Windows", keys:"Win + Shift + Left/Right", what:"Move window to other monitor" },
+  { scope:"windows", app:"Windows", keys:"Win + M / Win + Shift + M", what:"Minimize all / Restore minimized windows" },
+  { scope:"windows", app:"Windows", keys:"Win + Home", what:"Minimize all except active window" },
+  { scope:"windows", app:"Windows", keys:"Win + ,", what:"Peek at desktop (hold)" },
+  { scope:"windows", app:"Windows", keys:"Win + Ctrl + Q", what:"Quick Assist" },
+  { scope:"windows", app:"Windows", keys:"Win + Ctrl + C", what:"Toggle color filters" },
+  { scope:"windows", app:"Windows", keys:"Win + Ctrl + Enter", what:"Turn Narrator on/off" },
+  { scope:"windows", app:"Windows", keys:"Win + + / Win + -", what:"Magnifier zoom in/out" },
+  { scope:"windows", app:"Windows", keys:"Win + Esc", what:"Exit Magnifier" },
+  { scope:"windows", app:"Windows", keys:"Win + H", what:"Voice typing / dictation" },
+  { scope:"windows", app:"Windows", keys:"Win + O", what:"Lock device orientation" },
+  { scope:"windows", app:"Windows", keys:"Win + Shift + V", what:"Cycle through notifications (newer builds)" },
+
+  // --- Windows: Browser/Common ---
+  { scope:"windows", app:"Windows", keys:"Ctrl + T", what:"New browser tab" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + W", what:"Close browser tab" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Shift + T", what:"Reopen last closed tab" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + L", what:"Focus address bar" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + Tab / Ctrl + Shift + Tab", what:"Next / previous tab" },
+  { scope:"windows", app:"Windows", keys:"Ctrl + + / Ctrl + - / Ctrl + 0", what:"Zoom in / out / reset zoom" },
+
+  // --- Teams (MORE) ---
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + A", what:"Accept video call" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + D", what:"Decline call" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + H", what:"Hold / resume call" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + K", what:"Raise/lower hand" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + B", what:"Toggle background blur" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + L", what:"Start meeting (Calendar)" },
+  { scope:"office", app:"Teams", keys:"Ctrl + ,", what:"Open Settings" },
+  { scope:"office", app:"Teams", keys:"Ctrl + 2", what:"Go to Chat" },
+  { scope:"office", app:"Teams", keys:"Ctrl + 3", what:"Go to Teams" },
+  { scope:"office", app:"Teams", keys:"Ctrl + 4", what:"Go to Calendar" },
+  { scope:"office", app:"Teams", keys:"Ctrl + 5", what:"Go to Calls" },
+  { scope:"office", app:"Teams", keys:"Ctrl + 6", what:"Go to Files" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + U", what:"Open new chat window" },
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + O", what:"Toggle camera on/off" }, // duplicate-safe reminder
+  { scope:"office", app:"Teams", keys:"Ctrl + Shift + M", what:"Toggle mute on/off" }, // duplicate-safe reminder
+
+  // --- OneNote (MORE) ---
+  { scope:"office", app:"OneNote", keys:"Ctrl + M", what:"New quick note" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + Shift + N", what:"New section" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + Shift + A", what:"New subpage" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + Alt + N", what:"Insert date/time" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + Shift + 1/2/3/4/5/6/7/8/9", what:"Apply tag (To Do, Important, Question, etc.)" },
+  { scope:"office", app:"OneNote", keys:"Alt + Shift + D", what:"Dock OneNote to desktop / undock" },
+  { scope:"office", app:"OneNote", keys:"Ctrl + Shift + F", what:"Search in all notebooks" },
+
+  // --- Google Docs (MORE) ---
+  { scope:"google", app:"Google Docs", keys:"Ctrl + B / I / U", what:"Bold / Italic / Underline" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Shift + E / L / R / J", what:"Center / Left / Right / Justify alignment" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Alt + 0/1/2/3/4/5/6", what:"Normal text / Heading 1–6" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Shift + > / <", what:"Increase / decrease font size" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Shift + 7 / 8", what:"Numbered / bulleted list" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Alt + Shift + I", what:"Open document outline" },
+  { scope:"google", app:"Google Docs", keys:"Ctrl + Alt + Shift + A", what:"Open accessibility settings" },
+
+  // --- Google Sheets (MORE) ---
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + C / V / X", what:"Copy / Paste / Cut" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + Shift + +", what:"Insert row/column" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + -", what:"Delete row/column" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + Alt + M", what:"Insert comment / note" },
+  { scope:"google", app:"Google Sheets", keys:"F2", what:"Edit active cell" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + Enter", what:"Fill selection with current entry" },
+  { scope:"google", app:"Google Sheets", keys:"Ctrl + Shift + L", what:"Toggle filters" },
+  { scope:"google", app:"Google Sheets", keys:"Alt + Shift + 1/2/3/4/5/6/7/8/9", what:"Format number shortcuts (percent, currency, date, time, etc.)" },
+
+  // --- Gmail (MORE) ---
+  { scope:"google", app:"Gmail", keys:"K / J", what:"Newer / Older conversation" },
+  { scope:"google", app:"Gmail", keys:"X", what:"Select conversation" },
+  { scope:"google", app:"Gmail", keys:"S", what:"Star conversation" },
+  { scope:"google", app:"Gmail", keys:"!", what:"Report spam" },
+  { scope:"google", app:"Gmail", keys:"G then T", what:"Go to Sent mail" },
+  { scope:"google", app:"Gmail", keys:"G then D", what:"Go to Drafts" },
+
+  // --- Google Slides (MORE) ---
+  { scope:"google", app:"Google Slides", keys:"Ctrl + K", what:"Insert link" },
+  { scope:"google", app:"Google Slides", keys:"Ctrl + Alt + Shift + H", what:"Open version history" },
+  { scope:"google", app:"Google Slides", keys:"Ctrl + Shift + C / V", what:"Copy / paste formatting" },
+  { scope:"google", app:"Google Slides", keys:"Ctrl + Shift + >", what:"Increase font size" },
+  { scope:"google", app:"Google Slides", keys:"Ctrl + Shift + <", what:"Decrease font size" },
+
+  // --- Google Meet (MORE) ---
+  { scope:"google", app:"Google Meet", keys:"Ctrl + Alt + P", what:"Toggle people panel" },
+  { scope:"google", app:"Google Meet", keys:"Ctrl + Alt + S", what:"Toggle settings panel" },
+  { scope:"google", app:"Google Meet", keys:"Ctrl + Alt + M", what:"Mute/unmute chat notifications" },
+
+  // --- Google Calendar (MORE) ---
+  { scope:"google", app:"Google Calendar", keys:"Q", what:"Quick add event" },
+  { scope:"google", app:"Google Calendar", keys:"Esc", what:"Close dialogs / cancel" },
+  { scope:"google", app:"Google Calendar", keys:"Arrow Keys", what:"Move between days/weeks" },
+
+  // --- Chrome (MORE) ---
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + N", what:"New incognito window" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + B", what:"Show/hide bookmarks bar" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + J", what:"Downloads" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + H", what:"History" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + Delete", what:"Clear browsing data" },
+
+  // --- Chrome (EVEN MORE) ---
+  { scope:"google", app:"Chrome", keys:"Ctrl + N", what:"New window" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + N", what:"New Incognito window" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + T", what:"New tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + W", what:"Close current tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + T", what:"Reopen last closed tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Tab / Ctrl + Shift + Tab", what:"Next / previous tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + 1–8", what:"Jump to tab number 1–8" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + 9", what:"Jump to last tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + L / Alt + D / F6", what:"Focus address bar" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Enter", what:"Add .com to typed address and open" },
+  { scope:"google", app:"Chrome", keys:"Alt + Left/Right Arrow", what:"Back / Forward" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + R / F5", what:"Reload page" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + R", what:"Hard reload (ignore cache)" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + + / Ctrl + - / Ctrl + 0", what:"Zoom in / out / reset zoom" },
+  { scope:"google", app:"Chrome", keys:"Space / Shift + Space", what:"Page down / Page up" },
+  { scope:"google", app:"Chrome", keys:"Home / End", what:"Top / Bottom of page" },
+
+  // Tabs & organization
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + W", what:"Close current window (all tabs)" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + PgUp/PgDn", what:"Move tab left/right" },
+  { scope:"google", app:"Chrome", keys:"Alt + Shift + I", what:"Open tab search (newer Chrome)" },
+
+  // Find & navigation
+  { scope:"google", app:"Chrome", keys:"Ctrl + F", what:"Find on page" },
+  { scope:"google", app:"Chrome", keys:"F3 / Shift + F3", what:"Next / previous match" },
+
+  // Bookmarks & downloads
+  { scope:"google", app:"Chrome", keys:"Ctrl + D", what:"Bookmark current page" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + D", what:"Bookmark all open tabs" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + B", what:"Show/hide bookmarks bar" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + J", what:"Downloads" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + H", what:"History" },
+
+  // Developer / tools
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + I / F12", what:"Open Developer Tools" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + J", what:"Open DevTools Console tab" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + Delete", what:"Clear browsing data" },
+
+  // Address bar power moves
+  { scope:"google", app:"Chrome", keys:"Ctrl + K / Ctrl + E", what:"Search from address bar" },
+  { scope:"google", app:"Chrome", keys:"Alt + Enter", what:"Open typed URL/search in a new tab" },
+
+  // Misc
+  { scope:"google", app:"Chrome", keys:"Ctrl + P", what:"Print page" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + S", what:"Save page as..." },
+  { scope:"google", app:"Chrome", keys:"Ctrl + U", what:"View page source" },
+  { scope:"google", app:"Chrome", keys:"Ctrl + Shift + M", what:"Toggle device toolbar (responsive mode)" },
+
+
+
+
+
+
+
+
+];
+
+/** =========================
+ *  UI / FILTER STATE
+ *  ========================= */
+const sectionsEl = document.getElementById("sections");
+const pillsEl = document.getElementById("appPills");
+const emptyEl = document.getElementById("emptyState");
+const searchInput = document.getElementById("searchInput");
+const scopeSelect = document.getElementById("scopeSelect");
+
+const expandedStateKey = "shortcut_expanded_sections";
+const uiStateKey = "shortcut_ui_state";
+
+let state = {
+  search: "",
+  scope: "all",
+  app: "all",
+  expanded: new Set()
+};
+
+const scopeOrder = ["windows","office","google"];
+const scopeTitles = {
+  windows: "Windows Shortcuts",
+  office: "Microsoft Office Shortcuts",
+  google: "Google Workspace Shortcuts"
+};
+
+/** =========================
+ *  INIT
+ *  ========================= */
+function loadState(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(uiStateKey) || "{}");
+    state.search = saved.search || "";
+    state.scope = saved.scope || "all";
+    state.app = saved.app || "all";
+  }catch(e){}
+  try{
+    const exp = JSON.parse(localStorage.getItem(expandedStateKey) || "[]");
+    state.expanded = new Set(exp);
+  }catch(e){}
+}
+function saveState(){
+  localStorage.setItem(uiStateKey, JSON.stringify({
+    search: state.search, scope: state.scope, app: state.app
+  }));
+  localStorage.setItem(expandedStateKey, JSON.stringify([...state.expanded]));
+}
+
+loadState();
+searchInput.value = state.search;
+scopeSelect.value = state.scope;
+
+/** =========================
+ *  BUILD APP PILLS
+ *  ========================= */
+function buildAppPills(){
+  const apps = ["all", ...new Set(shortcuts.map(s => s.app))];
+  pillsEl.innerHTML = apps.map(app => {
+    const label = app === "all" ? "All Apps" : app;
+    return `<div class="pill ${state.app===app?"active":""}" data-app="${app}">${label}</div>`;
+  }).join("");
+  pillsEl.querySelectorAll(".pill").forEach(p => {
+    p.addEventListener("click", () => {
+      state.app = p.dataset.app;
+      saveState();
+      buildAppPills();
+      render();
+    });
+  });
+}
+buildAppPills();
+
+/** =========================
+ *  FILTERING
+ *  ========================= */
+function normalize(str){ return (str||"").toLowerCase(); }
+
+function matches(item){
+  if(state.scope !== "all" && item.scope !== state.scope) return false;
+  if(state.app !== "all" && item.app !== state.app) return false;
+  if(!state.search) return true;
+  const q = normalize(state.search);
+  const hay = normalize(item.keys + " " + item.what + " " + item.app + " " + item.scope);
+  return hay.includes(q);
+}
+
+/** =========================
+ *  RENDER SECTIONS
+ *  ========================= */
+function render(){
+  // Sync UI -> state (guard)
+  state.scope = scopeSelect.value;
+  state.search = searchInput.value.trim();
+  sectionsEl.innerHTML = "";
+  emptyEl.style.display = "none";
+
+  const filtered = shortcuts.filter(matches);
+
+  if(filtered.length === 0){
+    emptyEl.style.display = "block";
+    return;
+  }
+
+  for(const scope of scopeOrder){
+    const items = filtered.filter(s => s.scope === scope);
+    if(items.length === 0) continue;
+
+    const sectionId = scope;
+    const isCollapsed = !state.expanded.has(sectionId);
+
+    const rows = items.map((s) => `
+      <tr>
+        <td>
+          <div class="shortcut">
+            ${s.keys.split("+").map(k => `<span class="key">${k.trim()}</span>`).join(" ")}
+            <span class="platform">${scope.toUpperCase()}</span>
+            <span class="app">${s.app}</span>
+          </div>
+        </td>
+        <td>
+          <div class="desc">${s.what}</div>
+          ${s.note ? `<div class="note">${s.note}</div>` : ``}
+        </td>
+        <td>
+          <div class="actions">
+            <button class="tiny" data-copy="${escapeHtml(s.keys)}">Copy</button>
+          </div>
+        </td>
+      </tr>
+    `).join("");
+
+    const section = document.createElement("div");
+    section.className = `section ${isCollapsed?"collapsed":""}`;
+    section.innerHTML = `
+      <div class="section-head" data-section="${sectionId}">
+        <div class="section-title">
+          <span class="chev">▾</span>
+          <span>${scopeTitles[scope]}</span>
+        </div>
+        <div class="section-meta">${items.length} shortcut${items.length!==1?"s":""}</div>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Shortcut</th>
+              <th>What it does</th>
+              <th style="text-align:right;">Action</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    `;
+    sectionsEl.appendChild(section);
+  }
+
+  document.querySelectorAll(".section-head").forEach(h => {
+    h.addEventListener("click", () => {
+      const id = h.dataset.section;
+      if(state.expanded.has(id)) state.expanded.delete(id);
+      else state.expanded.add(id);
+      saveState();
+      render();
+    });
+  });
+
+  document.querySelectorAll("button[data-copy]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const text = btn.getAttribute("data-copy");
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = "Copied!";
+        setTimeout(()=>btn.textContent="Copy", 800);
+      });
+    });
+  });
+}
+
+render();
+
+/** =========================
+ *  EVENTS
+ *  ========================= */
+searchInput.addEventListener("input", e => {
+  state.search = e.target.value.trim();
+  saveState();
+  render();
+});
+
+scopeSelect.addEventListener("change", e => {
+  state.scope = e.target.value;
+  saveState();
+  render();
+});
+
+// Robust scope handler (backup for some browsers/hosts)
+scopeSelect.onchange = scopeSelect.oninput = (e) => {
+  state.scope = scopeSelect.value;
+  saveState();
+  render();
+};
+
+
+document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+document.getElementById("floatingPrintBtn").addEventListener("click", () => window.print());
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  state.search = "";
+  state.scope = "all";
+  state.app = "all";
+  state.expanded = new Set(scopeOrder);
+  saveState();
+  searchInput.value = "";
+  scopeSelect.value = "all";
+  buildAppPills();
+  render();
+});
+
+document.getElementById("expandAllBtn").addEventListener("click", () => {
+  state.expanded = new Set(scopeOrder);
+  saveState(); render();
+});
+document.getElementById("collapseAllBtn").addEventListener("click", () => {
+  state.expanded = new Set();
+  saveState(); render();
+});
+
+/** =========================
+ *  HELPERS
+ *  ========================= */
+function escapeHtml(str){
+  return (str||"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+</script>
+
+  <button class="floating-print" id="floatingPrintBtn" title="Print or Save as PDF">Print / Save PDF</button>
+
+</body>
+</html>
